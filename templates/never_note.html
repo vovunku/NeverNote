@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nevernote</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename='styles/block.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<header>
+    <h1>Список задач</h1>
+</header>
+<div class="row"></div>
+<div class="left">
+    <h2>Запланировано</h2>
+    <form action="/add_task" method="post" name="targets">
+        <label for="task_date">
+            <input type="date" name="task_date">
+        </label><br>
+        <label for="task_name">
+            <input type="text" name="task_name" placeholder="Ваше назавние задачи">
+        </label><br>
+        <label for="task">
+            <textarea name="task" cols="40" rows="3" placeholder="Введите описание вашей задачи"></textarea>
+        </label></p>
+        <p>
+            <button type="submit">Записать</button>
+            <button type="reset">Очистить</button>
+        </p>
+    </form>
+    <table>
+    </table>
+</div>
+<div id="block_center" class="center">
+    <h2>В работе</h2>
+    Тест 2
+    mnbmjnb
+    ;klmklkl
+</div>
+<div class="right">
+    <h2>Выполнено</h2>
+    Тест 3
+</div>
+</div>
+</body>
+</html>

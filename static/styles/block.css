@@ -1,0 +1,25 @@
+h1, h2{
+   text-align: center;
+}
+/*.row:after {
+   content: "";
+   display: table;
+   clear: both;
+ }*/
+ .row{
+    display: table;
+ }
+ .left, .center, .right{
+   width: 33.3333333333%;
+   height: 900px;
+   float: left;
+ }
+ .left{
+   background-color: cadetblue;
+ }
+ .center{
+   background-color: sandybrown;
+ }
+ .right{
+   background-color: darkgreen;
+ }
