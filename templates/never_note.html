@@ -21,26 +21,89 @@
         <label for="task_name">
             <input type="text" name="task_name" placeholder="Ваше назавние задачи">
         </label><br>
-        <label for="task">
-            <textarea name="task" cols="40" rows="3" placeholder="Введите описание вашей задачи"></textarea>
+        <label for="task_info">
+            <textarea name="task_info" cols="40" rows="3" placeholder="Введите описание вашей задачи"></textarea>
         </label>
         <p>
             <button type="submit">Записать</button>
             <button type="reset">Очистить</button>
         </p>
     </form>
-    <table>
+    <table class="fixed">
+        {% for task in task_list %} <!-- 0 - index, 1 - object -->
+            {% if task[1].state == "todo" %}
+                <tr>
+                    <td width="20%">
+                        <div class="scrollable">
+                            {{ task[1].name }}
+                        </div>
+                    </td>
+                    <td width="40%">
+                        <div class="scrollable">
+                            {{ task[1].info }}
+                        </div>
+                    </td>
+                    <td width="10%">
+                        <form action="/move_right/{{ task[0] }}" method="post">
+                            <button type="submit">Get started!</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
     </table>
 </div>
 <div id="block_center" class="center">
     <h2>В работе</h2>
-    Тест 2
-    mnbmjnb
-    ;klmklkl
+    <table class="fixed">
+        {% for task in task_list %} <!-- 0 - index, 1 - object -->
+            {% if task[1].state == "doing" %}
+                <tr>
+                    <td width="20%">
+                        <div class="scrollable">
+                            {{ task[1].name }}
+                        </div>
+                    </td>
+                    <td width="40%">
+                        <div class="scrollable">
+                            {{ task[1].info }}
+                        </div>
+                    </td>
+                    <td width="10%">
+                        <form action="/move_right/{{ task[0] }}" method="post">
+                            <button type="submit">Done!</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
 </div>
 <div class="right">
     <h2>Выполнено</h2>
-    Тест 3
+    <table class="fixed">
+        {% for task in task_list %} <!-- 0 - index, 1 - object -->
+            {% if task[1].state == "done" %}
+                <tr>
+                    <td width="20%">
+                        <div class="scrollable">
+                            {{ task[1].name }}
+                        </div>
+                    </td>
+                    <td width="40%">
+                        <div class="scrollable">
+                            {{ task[1].info }}
+                        </div>
+                    </td>
+                    <td width="10%">
+                        <form action="/move_right/{{ task[0] }}" method="post">
+                            <button type="submit">Finish!</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
 </div>
 </div>
 </body>

@@ -1,25 +1,46 @@
-h1, h2{
-   text-align: center;
+h1, h2 {
+    text-align: center;
 }
-/*.row:after {
-   content: "";
-   display: table;
-   clear: both;
- }*/
- .row{
+
+.row {
     display: table;
- }
- .left, .center, .right{
-   width: 33.3333333333%;
-   height: 900px;
-   float: left;
- }
- .left{
-   background-color: cadetblue;
- }
- .center{
-   background-color: sandybrown;
- }
- .right{
-   background-color: darkgreen;
- }
+}
+
+.left, .center, .right {
+    width: 33.3333333333%;
+    min-height: 900px;
+    height: 100%;
+    float: left;
+}
+
+.left {
+    background-color: cadetblue;
+}
+
+.center {
+    background-color: sandybrown;
+}
+
+.right {
+    background-color: darkgreen;
+}
+
+table.fixed {
+    table-layout: fixed;
+    width: 100%;
+    border: 3px solid black;
+}
+
+table.fixed td {
+    border: 2px solid grey;
+    word-wrap: break-word;
+}
+
+table.fixed th {
+    border: 2px solid grey;
+}
+
+.scrollable {
+    overflow-y: scroll;
+    max-height: 200px;
+}
