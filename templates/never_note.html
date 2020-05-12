@@ -11,10 +11,11 @@
 <header>
     <h1>Список задач</h1>
 </header>
-<div class="row"></div>
+<div class="row">
+    Tasks already finished: {{ done_tasks_count }}
+</div>
 <div class="left">
     <h2>Запланировано</h2>
-
     <div id="dark_background">
         <div id="tmp_window">
             <form action="/add_task" method="post" name="targets">
@@ -47,7 +48,8 @@
         {% for task in task_list %} <!-- 0 - index, 1 - object -->
             {% if task[1].state == "todo" %}
                 <tr>
-                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})" width="20%">
+                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                        width="20%">
                         <div class="scrollable">
                             {{ task[1].name }}
                         </div>
@@ -73,7 +75,8 @@
         {% for task in task_list %} <!-- 0 - index, 1 - object -->
             {% if task[1].state == "doing" %}
                 <tr>
-                    <td width="20%">
+                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                        width="20%">
                         <div class="scrollable">
                             {{ task[1].name }}
                         </div>
@@ -99,7 +102,8 @@
         {% for task in task_list %} <!-- 0 - index, 1 - object -->
             {% if task[1].state == "done" %}
                 <tr>
-                    <td width="20%">
+                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                        width="20%">
                         <div class="scrollable">
                             {{ task[1].name }}
                         </div>

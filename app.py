@@ -9,10 +9,11 @@ app = Flask(__name__)
 
 task_list = []
 
+done_tasks_list = []
 
 @app.route('/', methods=['GET'])
-def hello_world():
-    return never_note.render_task_desk(task_list)
+def render_site():
+    return never_note.render_task_desk(task_list, done_tasks_list)
 
 
 @app.route('/favicon.ico')
@@ -41,6 +42,7 @@ def move_right(task_id=None):
     try:
         task_list[task_id].move_right()
     except ValueError:
+        done_tasks_list.append(task_list[task_id])
         task_list.pop(task_id)
     return redirect('/')
 
