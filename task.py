@@ -18,3 +18,6 @@ class Task:
             self.state = "done"
         else:
             raise ValueError("unable to move")
+
+    def finish(self):
+        self.state = "finished"

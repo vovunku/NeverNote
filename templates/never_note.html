@@ -9,120 +9,146 @@
 </head>
 <body>
 <header>
-    <h1>Список задач</h1>
+    <table class="fixed">
+        <tr>
+            <td>
+                <form action="#dark_background">
+                    <button type="submit">Добавить задачу</button>
+                </form>
+            </td>
+            <td>
+                <form action="/get_task_sheet" method="get">
+                    <button>Get task sheet</button>
+                </form>
+            </td>
+            <td>
+                <form action="/add_task_sheet" method="post" enctype="multipart/form-data">
+                    <input name="task_sheet_name" type="file">
+                    <button>Add</button>
+                </form>
+            </td>
+            <td>
+                Tasks already finished: {{ done_tasks_count }}
+            </td>
+            <td>
+                <form action="#dark_background">
+                    <select name="select">
+                        {% for old_task in done_tasks %}
+                            <option onclick="this.form.submit();">{{ old_task[1].name }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </td>
+        </tr>
+    </table>
 </header>
 <div class="row">
-    Tasks already finished: {{ done_tasks_count }}
-</div>
-<div class="left">
-    <h2>Запланировано</h2>
-    <div id="dark_background">
-        <div id="tmp_window">
-            <form action="/add_task" method="post" name="targets">
-                <label for="task_date">
-                    <input type="date" name="task_date">
-                </label><br>
-                <label for="task_name">
-                    <input type="text" name="task_name" placeholder="Ваше назавние задачи">
-                </label><br>
-                <label for="task_info">
+    <div class="left">
+        <h2>Запланировано</h2>
+        <div id="dark_background">
+            <div id="tmp_window">
+                <form action="/add_task" method="post" name="targets">
+                    <label for="task_date">
+                        <input type="date" name="task_date">
+                    </label><br>
+                    <label for="task_name">
+                        <input type="text" name="task_name" placeholder="Ваше назавние задачи">
+                    </label><br>
+                    <label for="task_info">
                     <textarea name="task_info" cols="40" rows="3"
                               placeholder="Введите описание вашей задачи"></textarea>
-                </label><br>
-                <label for="task_complexity">
-                    Task complexity
-                    <input type="range" name="task_complexity" min="0" max="10" step="1">
-                </label><br>
-                <p>
-                    <button type="submit">Записать</button>
-                    <button type="reset">Очистить</button>
-                </p>
-            </form>
-            <a href="#" class="close">Закрыть окно</a>
+                    </label><br>
+                    <label for="task_complexity">
+                        Task complexity
+                        <input type="range" name="task_complexity" min="0" max="10" step="1">
+                    </label><br>
+                    <p>
+                        <button type="submit">Записать</button>
+                        <button type="reset">Очистить</button>
+                    </p>
+                </form>
+                <a href="#" class="close">Закрыть окно</a>
+            </div>
         </div>
+        <table class="fixed">
+            {% for task in task_list %} <!-- 0 - index, 1 - object -->
+                {% if task[1].state == "todo" %}
+                    <tr>
+                        <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                            width="20%">
+                            <div class="scrollable">
+                                {{ task[1].name }}
+                            </div>
+                        </td>
+                        <td width="40%">
+                            <div class="scrollable">
+                                {{ task[1].info }}
+                            </div>
+                        </td>
+                        <td width="10%">
+                            <form action="/move_right/{{ task[0] }}" method="post">
+                                <button type="submit">Start!</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
     </div>
-    <form action="#dark_background">
-        <button type="submit">Добавить задачу</button>
-    </form>
-    <table class="fixed">
-        {% for task in task_list %} <!-- 0 - index, 1 - object -->
-            {% if task[1].state == "todo" %}
-                <tr>
-                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
-                        width="20%">
-                        <div class="scrollable">
-                            {{ task[1].name }}
-                        </div>
-                    </td>
-                    <td width="40%">
-                        <div class="scrollable">
-                            {{ task[1].info }}
-                        </div>
-                    </td>
-                    <td width="10%">
-                        <form action="/move_right/{{ task[0] }}" method="post">
-                            <button type="submit">Get started!</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-</div>
-<div id="block_center" class="center">
-    <h2>В работе</h2>
-    <table class="fixed">
-        {% for task in task_list %} <!-- 0 - index, 1 - object -->
-            {% if task[1].state == "doing" %}
-                <tr>
-                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
-                        width="20%">
-                        <div class="scrollable">
-                            {{ task[1].name }}
-                        </div>
-                    </td>
-                    <td width="40%">
-                        <div class="scrollable">
-                            {{ task[1].info }}
-                        </div>
-                    </td>
-                    <td width="10%">
-                        <form action="/move_right/{{ task[0] }}" method="post">
-                            <button type="submit">Done!</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-</div>
-<div class="right">
-    <h2>Выполнено</h2>
-    <table class="fixed">
-        {% for task in task_list %} <!-- 0 - index, 1 - object -->
-            {% if task[1].state == "done" %}
-                <tr>
-                    <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
-                        width="20%">
-                        <div class="scrollable">
-                            {{ task[1].name }}
-                        </div>
-                    </td>
-                    <td width="40%">
-                        <div class="scrollable">
-                            {{ task[1].info }}
-                        </div>
-                    </td>
-                    <td width="10%">
-                        <form action="/move_right/{{ task[0] }}" method="post">
-                            <button type="submit">Finish!</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-</div>
+    <div id="block_center" class="center">
+        <h2>В работе</h2>
+        <table class="fixed">
+            {% for task in task_list %} <!-- 0 - index, 1 - object -->
+                {% if task[1].state == "doing" %}
+                    <tr>
+                        <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                            width="20%">
+                            <div class="scrollable">
+                                {{ task[1].name }}
+                            </div>
+                        </td>
+                        <td width="40%">
+                            <div class="scrollable">
+                                {{ task[1].info }}
+                            </div>
+                        </td>
+                        <td width="10%">
+                            <form action="/move_right/{{ task[0] }}" method="post">
+                                <button type="submit">Done!</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <div class="right">
+        <h2>Выполнено</h2>
+        <table class="fixed">
+            {% for task in task_list %} <!-- 0 - index, 1 - object -->
+                {% if task[1].state == "done" %}
+                    <tr>
+                        <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                            width="20%">
+                            <div class="scrollable">
+                                {{ task[1].name }}
+                            </div>
+                        </td>
+                        <td width="40%">
+                            <div class="scrollable">
+                                {{ task[1].info }}
+                            </div>
+                        </td>
+                        <td width="10%">
+                            <form action="/move_right/{{ task[0] }}" method="post">
+                                <button type="submit">Finish!</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
 </div>
 </body>
 </html>
