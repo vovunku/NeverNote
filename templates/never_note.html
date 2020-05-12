@@ -13,7 +13,7 @@
         <tr>
             <td>
                 <form action="#dark_background">
-                    <button type="submit">Добавить задачу</button>
+                    <button type="submit">Add task</button>
                 </form>
             </td>
             <td>
@@ -24,7 +24,7 @@
             <td>
                 <form action="/add_task_sheet" method="post" enctype="multipart/form-data">
                     <input name="task_sheet_name" type="file">
-                    <button>Add</button>
+                    <button>Add task sheet</button>
                 </form>
             </td>
             <td>
@@ -44,7 +44,7 @@
 </header>
 <div class="row">
     <div class="left">
-        <h2>Запланировано</h2>
+        <h2>Planned</h2>
         <div id="dark_background">
             <div id="tmp_window">
                 <form action="/add_task" method="post" name="targets">
@@ -52,11 +52,11 @@
                         <input type="date" name="task_date">
                     </label><br>
                     <label for="task_name">
-                        <input type="text" name="task_name" placeholder="Ваше назавние задачи">
+                        <input type="text" name="task_name" placeholder="Task name">
                     </label><br>
                     <label for="task_info">
                     <textarea name="task_info" cols="40" rows="3"
-                              placeholder="Введите описание вашей задачи"></textarea>
+                              placeholder="Enter a description of your task"></textarea>
                     </label><br>
                     <label for="task_complexity">
                         Task complexity
@@ -96,7 +96,7 @@
         </table>
     </div>
     <div id="block_center" class="center">
-        <h2>В работе</h2>
+        <h2>Doing</h2>
         <table class="fixed">
             {% for task in task_list %} <!-- 0 - index, 1 - object -->
                 {% if task[1].state == "doing" %}
@@ -123,7 +123,7 @@
         </table>
     </div>
     <div class="right">
-        <h2>Выполнено</h2>
+        <h2>Done</h2>
         <table class="fixed">
             {% for task in task_list %} <!-- 0 - index, 1 - object -->
                 {% if task[1].state == "done" %}
