@@ -29,8 +29,9 @@ def add_task():
     task_date = request.form.get("task_date")
     task_name = request.form.get("task_name")
     task_info = request.form.get("task_info")
-    print(task_date, task_name, task_info)
-    task_list.append(task.Task(task_date, task_name, task_info, "todo"))
+    task_complexity = request.form.get("task_complexity")
+    print(task_date, task_name, task_info, task_complexity)
+    task_list.append(task.Task(task_date, task_name, task_info, task_complexity, "todo"))
     return redirect('/')
 
 
