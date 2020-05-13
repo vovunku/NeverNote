@@ -39,7 +39,6 @@ def add_task():
     task_name = request.form.get("task_name")
     task_info = request.form.get("task_info")
     task_complexity = request.form.get("task_complexity")
-    print(task_date, task_name, task_info, task_complexity)
     task_list.append(task.Task(task_date, task_name, task_info, task_complexity, "todo"))
     return redirect('/')
 
@@ -58,8 +57,6 @@ def move_right(task_id=None):
 
 @app.route('/add_task_sheet', methods=["POST"])
 def add_task_sheet():
-    print("here")
-    print(request.files["task_sheet_name"])
     file = request.files["task_sheet_name"]
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
