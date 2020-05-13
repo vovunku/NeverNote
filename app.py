@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, redirect, send_from_directory
+from flask import Flask, jsonify, request, redirect, send_from_directory, flash
 from werkzeug.utils import secure_filename
 import logging
 import os
@@ -18,6 +18,8 @@ task_list = []
 
 done_tasks_list = []
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET'])
 def render_site():
@@ -57,14 +59,19 @@ def move_right(task_id=None):
 
 @app.route('/add_task_sheet', methods=["POST"])
 def add_task_sheet():
+    if "task_sheet_name" not in request.files:  # no file part
+        return redirect('/')
     file = request.files["task_sheet_name"]
-    filename = secure_filename(file.filename)
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    global task_list
-    global done_tasks_list
-    with open('tmp/' + filename) as inp_file:
-        imported = json.load(inp_file)
-        task_list, done_tasks_list = never_note.import_sheet(imported)
+    if file.filename == '':  # no file selected
+        return redirect('/')
+    elif file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        global task_list
+        global done_tasks_list
+        with open('tmp/' + filename) as inp_file:
+            imported = json.load(inp_file)
+            task_list, done_tasks_list = never_note.import_sheet(imported)
     return redirect('/')
 
 
