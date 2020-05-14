@@ -5,10 +5,10 @@ class Task:
         self.info = info
         self.state = state
         self.complexity = int(complexity)
-        first_clr = [50, 205, 50]
-        second_clr = [255, 0, 0]
-        self.compl_rgb = [first_num + int(self.complexity * (second_num - first_num) / 10)
-                          for first_num, second_num in zip(first_clr, second_clr)]  # from lime_green to red
+        easy_color = [50, 205, 50]
+        hard_color = [255, 0, 0]
+        self.complexity_rgb = [easy_num + int(self.complexity * (hard_num - easy_num) / 10)
+                               for easy_num, hard_num in zip(easy_color, hard_color)]  # from lime_green to red
 
     def move_right(self):
         if self.state == "todo":

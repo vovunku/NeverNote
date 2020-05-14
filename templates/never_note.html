@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +74,7 @@
             {% for task in task_list %} <!-- 0 - index, 1 - object -->
                 {% if task[1].state == "todo" %}
                     <tr>
-                        <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                        <td style="background: rgb({{ task[1].complexity_rgb[0] }}, {{ task[1].complexity_rgb[1] }}, {{ task[1].complexity_rgb[2] }})"
                             width="20%">
                             <div class="scrollable">
                                 {{ task[1].name }}
@@ -101,7 +101,7 @@
             {% for task in task_list %} <!-- 0 - index, 1 - object -->
                 {% if task[1].state == "doing" %}
                     <tr>
-                        <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                        <td style="background: rgb({{ task[1].complexity_rgb[0] }}, {{ task[1].complexity_rgb[1] }}, {{ task[1].complexity_rgb[2] }})"
                             width="20%">
                             <div class="scrollable">
                                 {{ task[1].name }}
@@ -128,7 +128,7 @@
             {% for task in task_list %} <!-- 0 - index, 1 - object -->
                 {% if task[1].state == "done" %}
                     <tr>
-                        <td style="background: rgb({{ task[1].compl_rgb[0] }}, {{ task[1].compl_rgb[1] }}, {{ task[1].compl_rgb[2] }})"
+                        <td style="background: rgb({{ task[1].complexity_rgb[0] }}, {{ task[1].complexity_rgb[1] }}, {{ task[1].complexity_rgb[2] }})"
                             width="20%">
                             <div class="scrollable">
                                 {{ task[1].name }}

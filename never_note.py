@@ -6,8 +6,8 @@ import task
 def render_task_desk(task_list, done_tasks_list):
     return render_template(
         "never_note.html",
-        task_list=enumerate(task_list),
-        done_tasks=enumerate(done_tasks_list),
+        task_list=list(enumerate(task_list)),
+        done_tasks=list(enumerate(done_tasks_list)),
         done_tasks_count=len(done_tasks_list)
     )
 
