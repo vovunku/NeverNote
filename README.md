@@ -1,16 +1,17 @@
 # NeverNote
-task manager server
-### Как запустить:
+Task manager server with possibility of exporting/importing your current task.
+### How to install:
 ```
 pip3 install flask
 python3 app.py
 ```
-далее переходим по адресу в консоли(скорее всего http://127.0.0.1:5000)
-### Как использовать:
-Глобально есть несколько опций:
-  1. Добавление задач(соответсвующая кнопка, далее будет предложено заполнить информацию о задаче)(заметим, что сложность будет отражена в цвете фона названия задачи)
-  2. Перевод задач из состояния в состояние(пока что можно только вправо)
-  3. Сохранить состояние доски с задачами(кнопка get task sheet)
-  4. Загрузить состояние доски с задачами(выбираем скаченное состояние и кнопка add task sheet)
-  5.(не работает пока, потому что непонятно как делать) Задачи из списка "finished" можно будет посмотреть во всплывающем окошке
-  
+Then open the address from the console(most likely http://127.0.0.1:5000) in your browser.
+### How to use:
+There are several features:
+  1. Add the task. There will be an **add task** button in the upper panel. An additional window will open as soon as you press it and you will be asked to fill in the information. The complexity will be reflected in the background colour of the task title.
+  2. Move the task after it has passed the stage. There will be **Start!**, **Done!** and **Finish** buttons for every task.
+  3. Download the state of the task board. The **get task sheet** button is responsible for this
+  4. Upload the status of the task board. You need to select the downloaded state using the **browse** button. Then press **add task sheet** to upload.
+  5. There is also a special counter for completed tasks. 
+### TODO:
+  1. Tasks from the **finished** list can be viewed in a special window.
